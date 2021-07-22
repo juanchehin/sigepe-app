@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<div class="container">
+    <h1 class="well">Formulario de registro de persona para grupo numero : {{ IdGrupoFamiliarActual }}</h1>
+    <div class="col-lg-12 well">
+        <div class="row">
+            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="nuevaPersonaGrupo()">
+                <div class="col-sm-12">
+                    <br>
+                    <div class="alert alert-primary" role="alert">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>DNI : </label>
+                                <input maxlength="11" size="11" pattern="[0-9]*" formControlName="DNI" name="DNI" required type="text" placeholder="DNI" class="form-control">
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input id="defaultCheck1" class="form-check-input" type="checkbox" formControlName="Positivo">
+                                <label class="form-check-label" for="defaultCheck1">Positivo</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input formControlName="JefeFamilia" id="defaultCheck2" class="form-check-input" type="checkbox">
+                                <label class="form-check-label" for="defaultCheck2">Jefe Familia</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input formControlName="Aislado" id="defaultCheck3" class="form-check-input" type="checkbox">
+                                <label class="form-check-label" for="defaultCheck3">Aislado</label>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Enfermedad : </label>
+                                <select class="custom-select" formControlName="IdEnfermedad">
+                                    <option (click)="banderaMedicacion = false" [selected]="true" value="null">Ninguna</option>
+                                    <option (click)="banderaMedicacion = true" *ngFor="let enfermedad of enfermedades" [ngValue]="enfermedad.IdEnfermedad">{{ enfermedad.Enfermedad }}</option>
+                                 </select>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Medicacion : </label>
+                                <input [attr.disabled]="!banderaMedicacion ? false : null" formControlName="Medicacion" name="Medicacion" type="text" placeholder="Medicacion..." class="form-control">
+                            </div>
+
+                            <div class="col-sm-6 form-group">
+                                <label for="start">Embarazo : </label>
+                                <select formControlName="Embarazo" name="Embarazo" class="form-control">
+                                    <option (click)="activarBanderaEmbarazo()" value="S">Si</option>
+                                    <option [selected]="true" (click)="banderaEmbarazo = false" value="N">No</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Semanas Embarazo : </label>
+                                <input [attr.disabled]="!banderaEmbarazo ? false : null" formControlName="SemanasEmbarazo" name="SemanasEmbarazo" type="text" placeholder="Semanas de Embarazo..." class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Ocupacion : </label>
+                                <input formControlName="Ocupacion" name="Ocupacion" type="text" placeholder="Ocupacion..." class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Edad : </label>
+                                <input maxlength="3" size="3" pattern="[0-9]*" formControlName="Edad" name="Edad" type="text" placeholder="Edad..." class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Observaciones : </label>
+                                <textarea formControlName="Observaciones" name="Observaciones" type="text" placeholder="Observaciones..." class="form-control"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br>
+                    <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Validar datos</button>
+                    <br>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

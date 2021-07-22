@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gestion Pedidos SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+</head>
+<br><br>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- <div class="col-sm-3 form-group"> -->
+                <button (click)="cargarPedidos( )" class="btn btn-success">
+                        Actualizar lista
+                            <i class="material-icons ">
+                                wifi_protected_setup
+                                </i>
+                            </button>
+                <!-- </div> -->
+                <br><br>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>N° Pedido</th>
+                            <th>Fecha Alta</th>
+                            <th>Beneficiario</th>
+                            <th>Asignado a</th>
+                            <th>Tipo de pedido</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let pedido of pedidos">
+                            <td>{{ pedido.IdPedido }}</td>
+                            <td>{{ pedido.Fecha | date:"dd/MM/yyyy"}}</td>
+                            <td>{{ pedido.Apellidos }} {{ pedido.Nombres }}</td>
+                            <td>{{ pedido.Usuario }}</td>
+                            <td>{{ pedido.Pedido }}</td>
+                            <td>{{ pedido.Estado }}</td>
+                            <td><button title="Ver Estado Pedido" [routerLink]="[ '/gestion/pedidos/', pedido.IdPedido ] " class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    remove_red_eye
+                                    </i>
+                            </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+        <br>
+        <button (click)="cambiarDesde(-5) " class="btn btn-secondary ">
+            Anteriores
+          </button>
+
+        <button (click)="cambiarDesde(5) " class="btn btn-secondary " style="margin-left: 50px; ">
+              Siguientes
+          </button>
+
+    </div>
+    <br>
+</div>

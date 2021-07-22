@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Nuevo Usuario SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+    <!--  -->
+
+</head>
+
+<div class="container">
+    <h1 class="well">Formulario de registro de usuario</h1>
+    <div class="col-lg-12 well">
+        <div class="row">
+            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarUsuario()">
+                <div class="col-sm-12">
+                    <br><br>
+                    <div class="alert alert-primary" role="alert">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>Apellidos : </label>
+                                <input formControlName="Apellidos" name="Apellidos" required type="text" placeholder="Apellidos" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Nombres : </label>
+                                <input formControlName="Nombres" name="Nombres" required type="text" placeholder="Nombres" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Nombre de Usuario : </label>
+                                <input formControlName="Usuario" name="Usuario" type="text" placeholder="Nombre de usuario" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Email : </label>
+                                <input formControlName="Email" name="Email" type="email" placeholder="Email del usuario" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Telefono : </label>
+                                <input formControlName="Telefono" name="Telefono" type="text" placeholder="Numero de telefono" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Contraseña : </label>
+                                <input formControlName="Password" name="Password" type="password" placeholder="Contraseña" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Repetir Contraseña : </label>
+                                <input formControlName="Password1" name="Password1" type="password" placeholder="Repetir Contraseña" class="form-control">
+                            </div>
+                            <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+                                <p class="text-danger">
+                                    Las contraseñas deben ser iguales
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success" role="alert">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>Rol : </label>
+                                <select class="custom-select" formControlName="IdRol" required>
+                                    <option value="" disabled>Elija un rol</option>
+                                    <option *ngFor="let rol of roles" [ngValue]="rol.IdRol">{{ rol.Rol }}</option>
+                                 </select>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Lugar de trabajo : </label>
+                                <select class="custom-select" formControlName="IdLugarTrabajo" required>
+                                    <option value="" disabled>Elija un lugar</option>
+                                    <option *ngFor="let lugar of lugaresTrabajo" [ngValue]="lugar.IdLugarTrabajo">{{ lugar.LugarTrabajo }}</option>
+                                 </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Cargar usuario</button>
+                    <br>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

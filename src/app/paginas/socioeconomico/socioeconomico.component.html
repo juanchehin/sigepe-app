@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SocioEconomicos SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+    <!--  -->
+
+</head>
+<div class="container">
+    <br>
+    <h4 class="card-title">Datos Socioeconómico de {{ Apellidos }} {{ Nombres }} </h4>
+    <!-- <div class="col"> -->
+    <button type="button" class="btn btn-info" [routerLink]="[ '/personas/socioeconomico/historial/', date ] ">Ver Historial SocioEc</button>
+    <!-- </div> -->
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="actualizaSocioeconomico()" id="forma">
+        <div class="col-lg-12 well">
+            <br>
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- Celeste ======================================================== -->
+            <!-- ============================================================================================== -->
+            <div class="col-sm-60">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Localidad : {{ Localidad }}</label>
+                            <button type="button" (click)="modificaBanderaLocalidad()" title="Editar Localidad" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+
+                            <select *ngIf="banderaLocalidad" class="custom-select" formControlName="IdLocalidad">
+                                    <option  disabled>Elija una localidad</option>
+                                    <option *ngFor="let localidad of localidades"  [ngValue]="localidad.IdLocalidad">{{ localidad.Localidad }}</option>
+                                 </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Barrio : {{ Barrio }}</label>
+                            <button type="button" (click)="modificaBanderaBarrio()" title="Editar Localidad" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <select *ngIf="banderaBarrio" class="custom-select" formControlName="IdBarrio">
+                                    <option value="" disabled>Elija un barrio</option>
+                                    <option *ngFor="let barrio of barrios" [ngValue]="barrio.IdBarrio">{{ barrio.Barrio }}</option>
+                                 </select>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Calle : {{ Calle }} </label>
+                            <button type="button" (click)="modificaBanderaCalle()" title="Editar Localidad" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <select *ngIf="banderaCalle" class="custom-select" formControlName="IdCalle">
+                                    <option value="" disabled>Elija una calle</option>
+                                    <option *ngFor="let calle of calles" [ngValue]="calle.IdCalle">{{ calle.Calle }}</option>
+                                 </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Numero calle: {{ NroCalle }} </label>
+                            <button type="button" (click)="modificaBanderaNroCalle()" title="Editar Localidad" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <input *ngIf="banderaNroCalle" formControlName="NroCalle" [value]="NroCalle" name="NroCalle" type="number" class="form-control" placeholder="Numero de calle...">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Vinculo : {{ Vinculo }}</label>.
+                            <button type="button" (click)="modificaBanderaVinculo()" title="Editar Localidad" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <input *ngIf="banderaVinculo" formControlName="Vinculo" [value]="Vinculo" name="Vinculo" type="text" class="form-control" placeholder="Vinculo...">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="start">Fecha de Nacimiento : {{ FechaNac | date:"dd/MM/yyyy" }} </label> <br>
+                            <button type="button" (click)="modificaBanderaFechaNac()" title="Editar Localidad" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <input *ngIf="banderaFechaNac" formControlName="FechaNac" [value]="FechaNac" type="date" name="FechaNac">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- Gris ======================================================== -->
+            <!-- ============================================================================================== -->
+
+            <div class="alert alert-dark" role="alert">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Estudios Cursados: {{ EstudiosCursados }}</label>
+                        <button type="button" (click)="modificaBanderaEstudios()" title="Editar Localidad" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaEstudios" formControlName="EstudiosCursados" [value]="EstudiosCursados" name="EstudiosCursados" type="text" class="form-control" placeholder="Estudios Cursados...">
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Escuela : {{ Escuela }}</label>
+                        <button type="button" (click)="modificaBanderaEscuela()" title="Editar Localidad" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaEscuela" class="custom-select" formControlName="IdEscuela">
+                                <option value="" disabled>Elija una Escuela</option>
+                                <option *ngFor="let escuela of escuelas" [ngValue]="escuela.IdEscuela">{{ escuela.Escuela }}</option>
+                             </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Profesion : {{ Profesion }}</label>
+                        <button type="button" (click)="modificaBanderaProfesion()" title="Editar Localidad" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaProfesion" formControlName="Profesion" [value]="Profesion" name="Profesion" type="text" class="form-control" placeholder="Profesion...">
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Situacion Laboral : {{ SituacionLaboral }} </label>
+                        <button type="button" (click)="modificaBanderaSituLab()" title="Editar Localidad" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaSituacionLab" formControlName="SituacionLaboral" [value]="SituacionLaboral" name="SituacionLaboral" type="text" class="form-control" placeholder="Situacion Laboral...">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Obra Social: {{ ObraSocial }}</label>
+                        <button type="button" (click)="modificaBanderaObraSoc()" title="Editar Localidad" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaObraSocial" formControlName="ObraSocial" [value]="ObraSocial" name="ObraSocial" type="text" class="form-control" placeholder="Obra Social...">
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Problematica Social : {{ ProblSocial }}</label>
+                        <button type="button" (click)="modificaBanderaProbSocial()" title="Editar Localidad" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaProbSocial" class="custom-select" formControlName="IdProblSocial">
+                                <option value="" disabled>Elija una Problematica</option>
+                                <option *ngFor="let problSocial of problSociales" [ngValue]="problSocial.IdProblSocial">{{ problSocial.ProblSocial }}</option>
+                             </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Tipo de Discapacidad : {{ TipoDiscapacidad }}</label>
+                        <button type="button" (click)="modificaBanderaTipoDiscapacidad()" title="Editar Localidad" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaTipoDiscapacidad" formControlName="TipoDiscapacidad" [value]="TipoDiscapacidad" name="TipoDiscapacidad" type="text" class="form-control" placeholder="Tipo de Discapacidad...">
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- 3 - VIVIENDA ======================================================== -->
+            <!-- ============================================================================================== -->
+            <div class="alert alert-warning" role="alert">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Tipo de Vivienda : {{ Vivienda }} </label>
+                        <button type="button" (click)="modificaBanderaTipoVivienda()" title="Editar Localidad" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaTipoVivienda" class="custom-select" formControlName="IdTipoVivienda">  <!--   Cambiar aqui, es IdTipoVivienda -->
+                            <option value="" disabled>Elija una Vivienda</option>
+                            <option *ngFor="let vivienda of tiposVivienda" [ngValue]="vivienda.IdVivienda">{{ vivienda.Vivienda }}</option>
+                         </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Tipo de Modulo : {{ Modulo }}</label>
+                        <button type="button" (click)="modificaBanderaTipoModulo()" title="Editar Tipo de vivienda" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaTipoModulo" class="custom-select" formControlName="IdModulo">
+                            <option value="" disabled>Elija un Modulo</option>
+                            <option *ngFor="let modulo of modulos" [ngValue]="modulo.IdModulo">{{ modulo.Modulo }}</option>
+                         </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Habitaciones : {{ Habitaciones }} </label>
+                        <button type="button" (click)="modificaBanderaHabitaciones()" title="Editar Habitacion" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaHabitaciones" formControlName="Habitaciones" [value]="Habitaciones" name="Habitaciones" type="number" class="form-control" placeholder="Habitaciones...">
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Tipo de techo : {{ Techo }}</label>
+                        <button type="button" (click)="modificaBanderaTipoTecho()" title="Editar Tipo de techo" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaTipoTecho" class="custom-select" formControlName="IdTecho">
+                            <option value="" disabled>Elija un techo</option>
+                            <option *ngFor="let techo of techos" [ngValue]="techo.IdTecho">{{ techo.Techo }}</option>
+                         </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Tipo de piso : {{ Piso }}</label>
+                        <button type="button" (click)="modificaBanderaPiso()" title="Editar Piso" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaTipoPiso" class="custom-select" formControlName="IdPiso">
+                            <option value="" disabled>Elija un piso</option>
+                            <option *ngFor="let piso of pisos" [ngValue]="piso.IdPiso">{{ piso.Piso }}</option>
+                         </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Tipo de baño : {{ Bano }}</label>
+                        <button type="button" (click)="modificaBanderaBano()" title="Editar Baño" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaTipoBano" class="custom-select" formControlName="IdBano">
+                            <option value="" disabled>Elija un bano</option>
+                            <option *ngFor="let bano of banos" [ngValue]="bano.IdBano">{{ bano.Bano }}</option>
+                         </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Agua Corriente: {{ AguaCte }} (S:Si - N:No)</label>
+                        <button type="button" (click)="modificaBanderaAguaCte()" title="Editar Agua corriente" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <!-- <input formControlName="AguaCte" [value]="AguaCte" name="AguaCte" type="text" class="form-control" placeholder="AguaCte..."> -->
+                        <select *ngIf="banderaAguaCte" [value]="AguaCte" formControlName="AguaCte" class="form-control">
+                            <option value="S">Si</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Gas Natural : {{ GasNatural }}(S:Si - N:No)</label>
+                        <button type="button" (click)="modificaBanderaGasNatual()" title="Editar Gas natural" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <!-- <input formControlName="GasNatural" [value]="GasNatural" name="GasNatural" type="text" class="form-control" placeholder="Gas Natural..."> -->
+                        <select *ngIf="banderaGasNatural" [value]="GasNatural" formControlName="GasNatural" class="form-control">
+                            <option value="S">Si</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Red Cloacal : {{ RedCloacal }}(S:Si - N:No)</label>
+                        <button type="button" (click)="modificaBanderaRedCloacal()" title="Editar Red cloacal" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <!-- <input formControlName="RedCloacal" [value]="RedCloacal" name="RedCloacal" type="text" class="form-control" placeholder="Red Cloacal..."> -->
+                        <select *ngIf="banderaRedCloacal" [value]="RedCloacal" formControlName="RedCloacal" class="form-control">
+                            <option value="S">Si</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Contrato Gas : {{ ContratoGas }}(S:Si - N:No)</label>
+                        <button type="button" (click)="modificaBanderaContratoGas()" title="Editar contrato" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <!-- <input formControlName="ContratoGas" [value]="ContratoGas" name="ContratoGas" type="text" class="form-control" placeholder="Contrato Gas..."> -->
+                        <select *ngIf="banderaContratoGas" [value]="ContratoGas" formControlName="ContratoGas" class="form-control">
+                            <option value="S">Si</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Situacion inmueble : {{ SituacionInmueble }}</label>
+                        <button type="button" (click)="modificaBanderaSituacionInmueble()" title="Editar Situacion Inmueble" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaSituacionInmueble" class="custom-select" formControlName="IdSituacionInmueble">
+                            <option value="" disabled>Elija una situacion</option>
+                            <option *ngFor="let situacionInmueble of situacionesInmuebles" [ngValue]="situacionInmueble.IdSituacionInmueble">{{ situacionInmueble.SituacionInmueble }}</option>
+                         </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Metros construccion : {{ MetrosConstruccion }}</label>
+                        <button type="button" (click)="modificaBanderaMetrosCons()" title="Editar metros construccion" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaMetrosCons" formControlName="MetrosConstruccion" [value]="MetrosConstruccion" name="MetrosConstruccion" type="number" class="form-control" placeholder="Metros Construccion...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Local Comercial : {{ LocalComercial }}</label>
+                        <button type="button" (click)="modificaBanderaLocalCom()" title="Editar Local Comercial" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <select *ngIf="banderaLocalCom" class="custom-select" formControlName="IdLocalComercial">
+                            <option value="" disabled>Elija un Local</option>
+                            <option *ngFor="let localcomercial of localescomerciales" [ngValue]="localcomercial.IdLocalComercial">{{ localcomercial.LocalComercial }}</option>
+                         </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Tipo de rubro : {{ TipoRubro }} </label>
+                        <button type="button" (click)="modificaBanderaTipoRubro()" title="Editar Tipo de rubro" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaTipoRubro" formControlName="TipoRubro" [value]="TipoRubro" name="TipoRubro" type="text" class="form-control" placeholder="Tipo de Rubro...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Nombre local comercial : {{ NombreLocalComercial }}</label>
+                        <button type="button" (click)="modificaBanderaNombLocalCom()" title="Editar Nombre local comercial" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaNombreLocalCom" formControlName="NombreLocalComercial" [value]="NombreLocalComercial" name="NombreLocalComercial" type="text" class="form-control" placeholder="Nombre del local...">
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Numero de lote : {{ NroLote }}</label>
+                        <button type="button" (click)="modificaBanderaNroLote()" title="Editar Nro Lote" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaNroLote" formControlName="NroLote" [value]="NroLote" name="NroLote" type="number" class="form-control" placeholder="Numero de lote...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Numero de padron : {{ NroPadron }}</label>
+                        <button type="button" (click)="modificaBanderaNroPadron()" title="Editar Nro padron" class="btn btn-muted ">
+                            <i class="material-icons ">
+                                edit
+                                </i>
+                            </button>
+                        <input *ngIf="banderaNroPadron" formControlName="NroPadron" [value]="NroPadron" name="NroPadron" type="text" class="form-control" placeholder="Num de padron...">
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- 4 - Observaciones ======================================================== -->
+            <!-- ============================================================================================== -->
+            <div class="alert alert-success" role="alert">
+                <div class="form-group">
+                    <label>Observaciones : {{ Observaciones }}</label>
+                    <button type="button" (click)="modificaBanderaObservaciones()" title="Editar Observaciones" class="btn btn-muted ">
+                        <i class="material-icons ">
+                            edit
+                            </i>
+                        </button>
+                    <textarea *ngIf="banderaObservaciones" formControlName="Observaciones" [value]="Observaciones" name="Observaciones" placeholder="Observaciones..." rows="3" class="form-control"></textarea>
+                </div>
+
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Guardar Socioeconomico</button>
+            <br>
+        </div>
+    </form>
+</div>

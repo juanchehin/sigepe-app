@@ -1,0 +1,28 @@
+<div class="container">
+    <h4 class="card-title">Edicion de {{ ModuloAlimenticio }}</h4>
+
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="actualizaModuloAlimenticio()" id="forma">
+        <div class="alert alert-primary">
+            <div class="row">
+                <div class="col">
+                    <label>Nombre del Modulo : </label>
+                    <input formControlName="ModuloAlimenticio" [value]="ModuloAlimenticio" name="ModuloAlimenticio" type="text" class="form-control" placeholder="Modulo Alimenticio...">
+                </div>
+                <div class="col">
+                    <label for="start">Estado : </label>
+                    <select formControlName="Estado" [value]="Estado" name="Estado" class="form-control">
+                                    <option value="A">Alta</option>
+                                    <option value="B">Baja</option>
+                                </select>
+                </div>
+            </div>
+            <div class="row">
+                <label>Observaciones : </label>
+                <textarea formControlName="Observaciones" [value]="Observaciones" name="Observaciones" type="text" placeholder="Observaciones..." class="form-control">Observaciones</textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Guardar cambios</button>
+        <br><br>
+    </form>
+
+</div>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Estado de un pedido SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+    <!--  -->
+
+</head>
+<div class="container">
+    <br>
+    <h4 class="card-title">Pedido de {{ Apellidos }} {{ Nombres }} </h4>
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="actualizaPedido()" id="forma">
+        <div class="col-lg-12 well">
+            <br>
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- Celeste ======================================================== -->
+            <!-- ============================================================================================== -->
+            <div class="col-sm-60">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Asignado a : {{ Usuario }}</label>
+                            <button type="button" (click)="modificaBanderaUsuario()" title="Editar asignacion" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <select *ngIf="banderaUsuario" class="custom-select" formControlName="IdUsuario">
+                                    <option value="" disabled>Elija un Usuario</option>
+                                    <option *ngFor="let usuario of usuarios" [ngValue]="usuario.IdUsuario">{{ usuario.Usuario }}</option>
+                                 </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Fecha de asignacion : {{ Fecha | date:"dd/MM/yyyy" }} </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Autorizado (S:Si - N:No) : {{ Autorizado }} </label>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Estado (P:Pendiente - T:Terminado): {{ Estado }}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Tipo de Pedido : {{ TipoPedido }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- 4 - Observaciones ======================================================== -->
+            <!-- ============================================================================================== -->
+            <div class="alert alert-success" role="alert">
+                <div class="form-group">
+                    <label>Observaciones : {{ Observaciones }}</label>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Guardar Cambios</button>
+            <br>
+        </div>
+    </form>
+    <!-- ============================================================================================== -->
+    <!-- ============================== * CHAT * ======================================================== -->
+    <!-- ============================================================================================== -->
+
+    <!-- <h1>Chat</h1> -->
+
+
+    <div class=" chat-window">
+        <div class="app-mensajes" id="app-mensajes">
+            <div class="card-header">
+                <h3>Chat</h3>
+            </div>
+
+            <div *ngFor="let chat of chats" [ngClass]="{ 'text-right': IdUsuario == chat.IdUsuario  }">
+                <span class="badge" [ngClass]="{ 'badge-primary': IdUsuario == chat.IdUsuario,'badge-success': IdUsuario != chat.IdUsuario }">
+          {{ chat.Usuario }}</span>
+                <h6>
+                    {{ chat.Mensaje }}
+                </h6>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="input-group mb-3 send-window">
+        <input class="form-control" aria-describedby="button-addon2" type="text" name="mensaje" [(ngModel)]="mensaje" (keyup.enter)="enviar_mensaje()" placeholder="Escribe un mensaje...">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" title="Enviar Mensaje" (click)="enviar_mensaje()" type="button">
+                <i class="material-icons ">
+                    send
+                    </i>
+            </button> </div>
+    </div>
+    <br><br>

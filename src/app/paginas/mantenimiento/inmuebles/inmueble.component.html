@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Nueva inmueble SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+    <!--  -->
+
+</head>
+
+<div class="container">
+    <h1 class="well">Formulario de registro de inmueble</h1>
+    <!-- <div class="col-lg-12 well"> -->
+    <!-- <div class="row"> -->
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="nuevoInmueble()">
+        <br><br>
+        <div class="alert alert-primary" role="alert">
+            <!-- <div class="col-sm-6 form-group"> -->
+            <label>Inmueble : </label>
+            <input formControlName="Inmueble" name="Inmueble" required type="text" placeholder="Inmueble..." class="form-control">
+            <!-- </div> -->
+            <br>
+            <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Cargar Inmueble</button>
+            <br>
+        </div>
+
+
+    </form>
+    <br><br>
+    <!-- </div> -->
+    <!-- </div> -->
+</div>

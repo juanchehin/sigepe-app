@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SocioEconomicos SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+    <!--  -->
+
+</head>
+<div class="container">
+    <br>
+    <h4 class="card-title">Edicion de Usuario {{ Usuario }}</h4>
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="actualizaUsuario()" id="forma">
+        <div class="col-lg-12 well">
+            <br>
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- Celeste ======================================================== -->
+            <!-- ============================================================================================== -->
+            <div class="col-sm-60">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Rol : {{ Rol }}</label>
+                            <button type="button" (click)="modificaBanderaRol()" title="Editar Rol del usuario" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+
+                            <select *ngIf="banderaRol" class="custom-select" formControlName="IdRol">
+                                    <option  disabled>Elija un rol</option>
+                                    <option *ngFor="let rol of roles"  [ngValue]="rol.IdRol">{{ rol.Rol }}</option>
+                                 </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Lugar de trabajo : {{ LugarTrabajo }}</label>
+                            <button type="button" (click)="modificaBanderaLugarTrabajo()" title="Editar Lugar de trabajo" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <select *ngIf="banderaLugarTrabajo" class="custom-select" formControlName="IdLugarTrabajo">
+                                    <option disabled>Elija un lugar de trabajo</option>
+                                    <option *ngFor="let lugar of lugaresTrabajo" [ngValue]="lugar.IdLugarTrabajo">{{ lugar.LugarTrabajo }}</option>
+                                 </select>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Nombre de usuario : {{ Usuario }} </label>
+                            <button type="button" (click)="modificaBanderaUsuario()" title="Editar Nombre de usuario" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <input *ngIf="banderaUsuario" formControlName="Usuario" [value]="Usuario" name="Usuario" type="text" class="form-control" placeholder="Nombre de usuario...">
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <label>Contraseña : ******* </label>
+                            <button type="button" (click)="modificaBanderaContrasena()" title="Editar Contraseña" class="btn btn-muted ">
+                                    <i class="material-icons ">
+                                        edit
+                                        </i>
+                                    </button>
+                            <input *ngIf="banderaContrasena" formControlName="Password" name="Password" type="password" placeholder="Nueva Contraseña..." class="form-control">
+                            <br>
+                            <input *ngIf="banderaContrasena" formControlName="Password1" name="Password1" type="password" placeholder="Repetir Contraseña..." class="form-control">
+                            <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+                                <p class="text-danger">
+                                    Las contraseñas deben ser iguales
+                                </p>
+                            </div>
+                            <br>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Apellidos : {{ Apellidos }} </label>
+                            <button type="button" (click)="modificaBanderaApellidos()" title="Editar Localidad" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <input *ngIf="banderaApellidos" formControlName="Apellidos" [value]="Apellidos" name="NroCalle" type="text" class="form-control" placeholder="Numero de calle...">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Nombres : {{ Nombres }}</label>
+                            <button type="button" (click)="modificaBanderaNombres()" title="Editar Nombres" class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                            <input *ngIf="banderaNombres" formControlName="Nombres" [value]="Nombres" name="Nombres" type="text" class="form-control" placeholder="Vinculo...">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Telefono : {{ Telefono }} </label>
+                            <button type="button" (click)="modificaBanderaTelefono()" title="Editar Telefono" class="btn btn-muted">
+                              <i class="material-icons ">
+                                  edit
+                                  </i>
+                              </button>
+                            <input *ngIf="banderaTelefono" formControlName="Telefono" [value]="Telefono" name="Telefono" type="text" class="form-control" placeholder="Telefono...">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Email : {{ Mail }}</label>
+                            <button type="button" (click)="modificaBanderaMail()" title="Editar Mail" class="btn btn-muted ">
+                              <i class="material-icons ">
+                                  edit
+                                  </i>
+                              </button>
+                            <input *ngIf="banderaMail" formControlName="Mail" [value]="Mail" name="Mail" type="text" class="form-control" placeholder="Mail...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Guardar Cambios</button>
+        <br>
+    </form>
+</div>

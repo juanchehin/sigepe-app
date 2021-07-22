@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<br>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/control']">Control Covid-19</a></li>
+        <!-- <li class="breadcrumb-item"><a [routerLink]="['/control/entregas']">Entregas</a></li> -->
+        <li class="breadcrumb-item active" aria-current="page">Nueva entrega</li>
+    </ol>
+</nav>
+<div class="container">
+    <!-- <br> -->
+    <div class="row">
+        <h1 class="well">Nueva entrega para : {{ Apellidos }} {{ Nombres }}</h1>
+    </div>
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="nuevaEntrega()">
+        <div class="alert alert-primary" role="alert">
+            <!-- <div class="container"> -->
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>Frecuencia de entrega (en dias) : </label>
+                    <input formControlName="Frecuencia" maxlength="1" size="1" pattern="[0-9]*" min="1" name="Frecuencia" required type="text" placeholder="Dias de entrega..." class="form-control">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Limite de entregas (max 4) : </label>
+                    <input required formControlName="MaxEntregas" maxlength="1" size="1" pattern="[0-9]*" min="1" name="MaxEntregas" type="text" placeholder="Maxima cantidad de entregas" class="form-control">
+                </div>
+
+            </div>
+            <!-- </div> -->
+            <br>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <h5><label>Domicilio Padron : {{ Domicilio }}</label></h5>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Domicilio entrega : </label>
+                    <input formControlName="DireccionEntrega" type="text" placeholder="Domicilio de entrega..." class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>Hisopado : </label>
+                    <select class="custom-select" formControlName="Hisopado">
+                        <option (click)="desactivarHisopado()" [selected]="true" value="N">No</option>
+                        <option (click)="activarHisopado()" value="S">Si</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Positivo/Sospechoso : </label>
+                    <select [attr.disabled]="!banderaHisopado ? false : null" class="custom-select" formControlName="Positivo">
+                    <option [selected]="true" value="S">Sospechoso</option>
+                    <option value="P">Positivo</option>
+                 </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>Telefono : </label>
+                    <input maxlength="15" size="15" pattern="[0-9]*" formControlName="Telefono" type="text" placeholder="Telefono..." class="form-control">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Observaciones : </label>
+                    <textarea formControlName="Observaciones" name="Observaciones" type="text" placeholder="Observaciones..." class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>Modulo Alimenticio : </label>
+                    <select class="custom-select" formControlName="IdModuloAlimenticio" required>
+                        <option value="" disabled>Elija un modulo...</option>
+                        <option *ngFor="let modulo of modulos" [ngValue]="modulo.IdModuloAlimenticio">{{ modulo.Modulo }} </option>
+                     </select>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Barrio : </label>
+                    <select class="custom-select" formControlName="IdBarrio">
+                        <option value="" disabled>Elija un barrio...</option>
+                        <option *ngFor="let barrio of barrios" [ngValue]="barrio.IdBarrio">{{ barrio.Barrio }} </option>
+                     </select>
+                </div>
+                <div class="col-sm-6 ">
+                    <input id="Asistencia" class="form-check-input" type="checkbox" formControlName="Asistencia">
+                    <label class="form-check-label" for="defaultCheck1">No requiere asistencia</label>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Aislado por : </label>
+                    <select class="custom-select" formControlName="AisladoPor">
+                    <option [selected]="true" value="H">Hospital</option>
+                    <option value="S">SUM</option>
+                 </select>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Cargar entrega</button>
+        <br>
+
+    </form>
+</div>

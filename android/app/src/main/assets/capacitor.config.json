@@ -1,0 +1,6 @@
+{
+	"appId": "com.example.app",
+	"appName": "sigepe",
+	"webDir": "dist/sigepe",
+	"bundledWebRuntime": false
+}

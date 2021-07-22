@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<br>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/control']">Control Covid-19</a></li>
+        <!-- <li class="breadcrumb-item"><a [routerLink]="['/control/entregas']">Entregas</a></li> -->
+        <li class="breadcrumb-item active" aria-current="page">Listado de entregas</li>
+    </ol>
+</nav>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- <div class="text-right">
+                    <button [routerLink]="['/control/entregas/nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                      <i class="fa fa-plus"></i> 
+                      Nueva entrega
+                    </button>
+                </div> -->
+                <!-- <h3 class="card-title">Cantidad de entregas ( <small> {{ totalEntregas }} </small> )</h3> -->
+                <div class="col-sm-6 form-group">
+                    <label class="control-label">Filtrar por dias restantes :  </label>
+                    <select id="filtro" [(ngModel)]="filtroSeleccionado" (ngModelChange)="cambios($event)" class="browser-default custom-select">
+                        <option selected value="-1"> Todos </option>
+                        <option value="0"> Hoy </option>
+                        <option value="1"> 1 dia </option>
+                        <option value="2"> 2 dias </option>
+                        <option value="3"> 3 dias </option>
+                        <option value="4"> 4 dias </option>
+                        <option value="5"> 5 dias </option>
+                        <option value="6"> 6 dias </option>
+                        <option value="7"> 7 dias </option>
+                    </select>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Barrio : </label>
+                    <select class="custom-select" [(ngModel)]="barrioSeleccionado" (ngModelChange)="cambiosBarrios($event)">
+                        <option value="-1" >Todos los barrios</option>
+                        <option name="Barrio" ngDefaultControl [value]="barrio.IdBarrio" *ngFor="let barrio of barrios" >{{ barrio.Barrio }} </option>
+                     </select>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Apellidos y Nombres</th>
+                            <th>Direccion entrega</th>
+                            <th>Barrio</th>
+                            <!-- <th>Fecha entrega 1</th>
+                            <th>Fecha entrega 2</th>
+                            <th>Fecha entrega 3</th>
+                            <th>Fecha entrega 4</th> -->
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let entrega of entregas">
+                            <td>{{ entrega.Apellidos }} {{ entrega.Nombres }}</td>
+                            <td>{{ entrega.DireccionEntrega }}</td>
+                            <td>{{ entrega.Barrio }}</td>
+                            <!-- <td *ngIf="entrega.DiasRestantes >= 0">Faltan {{ entrega.DiasRestantes }} dias</td> -->
+                            <!-- <td>{{ entrega.FechaEntrega1 | date:"dd/MM/yyyy"}}</td>
+                            <td>{{ entrega.FechaEntrega2 | date:"dd/MM/yyyy"}}</td>
+                            <td>{{ entrega.FechaEntrega3 | date:"dd/MM/yyyy"}}</td>
+                            <td>{{ entrega.FechaEntrega4 | date:"dd/MM/yyyy"}}</td> -->
+                            <!-- <td *ngIf="entrega.DiasRestantes < 0"> Vencido </td> -->
+                            <!-- <td>{{ entrega.NroEntrega }}</td> -->
+                            <!-- ************* BOTONES ****************** -->
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button [routerLink]="[ '/control/entrega', entrega.IdPersona ] " type="button" title="Ver detalles" class="btn btn-info ">
+                                        <i class="material-icons ">
+                                            remove_red_eye
+                                            </i>
+                                    </button>
+                                    <button (click)="incumplimiento( entrega )" type="button" title="Inclumplimiento" class="btn btn-danger ">
+                                    <i class="material-icons ">
+                                        clear
+                                        </i>
+                                </button>
+                                </div>
+                            </td>
+                            <!-- ************* FIN BOTONES ****************** -->
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                    Anteriores
+                  </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary" style="margin-left: 50px; ">
+                      Siguientes
+                  </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

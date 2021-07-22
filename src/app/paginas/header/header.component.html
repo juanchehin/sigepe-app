@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+
+    <title>SIGEPE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+</head>
+
+<body>
+    <header role="banner">
+        <!-- Image and text -->
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="assets/images/MuniAgui.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy"> SIGEPE
+            </a>
+            <button *ngIf="!comprobarLogueo()" (click)="usuarioService.logout()" type="button" class="btn btn-primary btn-lg float-right"><i class="material-icons ">
+                account_circle
+                </i>{{ Usuario }}</button>
+        </nav>
+
+        <ul *ngIf="!comprobarLogueo()" class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="[ '/personas' ] ">Personas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="banderaAdmin" [routerLink]="[ '/usuarios' ] ">Usuarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="IdRol === 2 || banderaAdmin" [routerLink]="[ '/estadisticas' ] ">Estadisticas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="banderaAdmin" [routerLink]="[ '/mantenimiento' ] ">Gestion SIGEPE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="IdRol === 2 || banderaAdmin" [routerLink]="[ '/gestion/pedidos' ] ">Gestion de pedidos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="IdRol === 3" [routerLink]="[ '/empleado/pedidos', IdUsuario ] ">Mis pedidos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="IdRol === 4 || banderaAdmin" [routerLink]="[ '/control' ] ">Covid-19</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="banderaAdmin" [routerLink]="[ '/importador' ] ">Importador excel</a>
+            </li>
+        </ul>
+    </header>
+
+    <script src="/assets/js/popper.min.js "></script>
+    <script src="/assets/js/bootstrap.min.js "></script>
+    <script src="/assets/js/owl.carousel.min.js "></script>
+    <script src="/assets/js/main.js "></script>
+
+</body>
+
+</html>

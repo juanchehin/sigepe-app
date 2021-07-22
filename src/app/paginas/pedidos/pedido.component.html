@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PEDIDO SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+    <!--  -->
+
+</head>
+
+<div class="container">
+    <h1 class="well">Formulario de pedido para {{ Apellidos }} {{ Nombres }} </h1>
+    <div class="col-lg-12 well">
+        <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarPedido()">
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- 1 ======================================================== -->
+            <!-- ============================================================================================== -->
+            <div class="alert alert-primary" role="alert">
+                <div class="col-sm-60">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Tipo de Pedido : </label>
+                            <select class="custom-select" required>
+                                    <option value="" disabled>Elija un pedido </option>
+                                    <option (click)="activarBandera(1)"> Salud </option>
+                                    <option (click)="activarBandera(2)"> Ayuda Economica </option>
+                                    <option (click)="activarBandera(3)"> Ayuda Vivienda </option>
+                                    <option (click)="activarBandera(4)"> Instituciones </option>
+                                    <option (click)="activarBandera(5)"> Fallecimientos </option>
+                                    <option value="21"> Otros </option>
+                            </select>
+                            <br><br>
+                            <!-- Salud -->
+                            <select *ngIf="banderaSalud" class="custom-select" formControlName="IdTipoPedido" required>
+                                    <option value="" disabled>Elija un subtipo </option>
+                                    <option value="1"> Medicamento </option>
+                                    <option value="2"> Ortopedia </option>
+                                    <option value="3"> Visita </option>
+                                    <option value="4"> Visita 2 </option>
+                                    <option value="5"> Visita 3 </option>
+                                    <option value="6"> Visita O.S </option>
+                            </select>
+                            <!-- Ayuda Economica -->
+                            <select *ngIf="banderaAyudaEconomica" class="custom-select" formControlName="IdTipoPedido" required>
+                                <option value="" disabled>Elija un subtipo </option>
+                                <option value="7"> Luz </option>
+                                <option value="8"> Comida </option>
+                                <option value="9"> Bolson </option>
+                            </select>
+                            <!-- Ayuda vivienda -->
+                            <select *ngIf="banderaVivienda" class="custom-select" formControlName="IdTipoPedido" required>
+                                <option value="" disabled>Elija un subtipo </option>
+                                <option value="10"> Materiales </option>
+                                <option value="11"> M.O </option>
+                                <option value="12"> Inst 3 </option>                      
+                            </select>
+                            <!-- Instituciones -->
+                            <select *ngIf="banderaInstituciones" class="custom-select" formControlName="IdTipoPedido" required>
+                                <option value="" disabled>Elija un subtipo </option>
+                                <option value="13"> Sociales </option>
+                                <option value="14"> Deposito </option>
+                                <option value="15"> Hogares </option>                                
+                            </select>
+                            <!-- Fallecimientos -->
+                            <select *ngIf="banderaFallecimientos" class="custom-select" formControlName="IdTipoPedido" required>
+                                <option value="" disabled>Elija un subtipo </option>
+                                <option value="16"> Gestion 103 </option>
+                                <option value="17"> Mercaderia </option>
+                                <option value="18"> Terreno Cementerio </option>
+                                <option value="19"> Velado Sala municipal </option>
+                                <option value="20"> Velado Domicilio particular </option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <div>
+                                <label class="control-label">Beneficiario : </label>
+                                <input formControlName="Beneficiario" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+                            </div>
+                            <br>
+                            <!-- <div class="col-sm-6 form-group"> -->
+                            <div>
+                                <label class="control-label">Autorizado : </label>
+                                <input formControlName="Autorizado" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ============================================================================================== -->
+            <!-- ========================== --- 2 - Gris ======================================================== -->
+            <!-- ============================================================================================== -->
+            <div class="alert alert-dark" role="alert">
+                <!-- <div class="row"> -->
+                <div class="form-group">
+                    <label>Observaciones : </label>
+                    <textarea formControlName="Observaciones" name="Observaciones" placeholder="Observaciones..." rows="3" class="form-control"></textarea>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Cargar pedido</button>
+            <br>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Principal Censo SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+    <!--  -->
+
+</head>
+<br>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="[ '/control' ] ">Control Covid-19</a></li>
+        <!-- <li class="breadcrumb-item"><a href="#">Censo</a></li> -->
+        <li class="breadcrumb-item active" aria-current="page">Censo</li>
+    </ol>
+</nav>
+<br>
+
+
+<div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-4 ">
+        <div class="card">
+            <img src="assets/images/family.png" class="mx-auto d-block w-25 h-25" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Nuevo Grupo Familiar</h5>
+                <a [routerLink]="['/control/censo/grupo/nuevo']" class="btn btn-primary stretched-link">Nuevo grupo</a>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card ">
+            <img src="assets/images/list.png" class="mx-auto d-block w-25 h-25" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Listar grupos familiares</h5>
+                <a [routerLink]="['/control/censo/grupo/listar']" class="btn btn-primary stretched-link">Listar</a>
+            </div>
+        </div>
+    </div>
+</div>

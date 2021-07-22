@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<br>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/control']">Control Covid-19</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/control/entregas/listar']">Listado de entrega</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Entrega N° {{ entregas[0].IdEntrega }}</li>
+    </ol>
+</nav>
+<h3>Detalles de entrega para {{ entregas[0].Apellidos }} {{ entregas[0].Nombres }} </h3>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Entrega N°</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let entrega of entregas; index as i">
+                            <td>{{ arrayNumeros[i] }}</td>
+                            <td>{{ entrega.FechaEntrega | date:"dd/MM/yyyy"}}</td>
+                            <td>{{ entrega.EstadoEntrega }}</td>
+                            <td>
+                                <button [disabled]="entrega.EstadoEntrega !== 'Pendiente'" (click)="concluirEntrega( entrega.IdEntrega )" type="button" title="Concluir" class="btn btn-success ">
+                                    <i class="material-icons ">
+                                        done_outline
+                                        </i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <!-- ================= Mas detalles ======================= -->
+        <div class="alert alert-secondary" role="alert">
+            <div class="row">
+                <div class="col">
+                    Fecha de carga : {{ entregas[0].FechaAlta | date:"dd/MM/yyyy"}}
+                </div>
+                <div class="col">
+                    Maxima cantidad de entregas : {{ entregas[0].MaxCantEntregas }}
+                </div>
+                <div class="col">
+                    Frecuencia : {{ entregas[0].Frecuencia }} dias
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Estado general de la persona : {{ entregas[0].EstadoPerCovid }}
+                </div>
+                <div class="col">
+                    Modulo asignado : {{ entregas[0].Modulo }}
+                </div>
+                <div class="col">
+                    Direccion entrega : {{ entregas[0].DireccionEntrega }}
+                </div>
+                <!-- <div class="col">
+                    Fecha estimada hisopado : {{ entregas[0].FechaHisopado | date:"dd/MM/yyyy" }}
+                </div> -->
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    Hisopado : {{ entregas[0].Hisopado }}
+                </div>
+                <div class="col">
+                    Telefono : {{ entregas[0].Telefono }}
+                </div>
+                <div class="col">
+                    Positivo/Sospechoso : {{ entregas[0].Positivo }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Aislado por : {{ entregas[0].AisladoPor }}
+                </div>
+                <div class="col">
+                    Barrio : {{ entregas[0].Barrio }}
+                </div>
+                <div class="col">
+                    Observaciones : {{ entregas[0].Observaciones }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

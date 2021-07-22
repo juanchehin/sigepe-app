@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<br>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card ">
+            <div class="col-sm-60">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Apellido: </label><input (keyup.enter)="buscarApellNomb( )" #input type="text" class="form-control" placeholder="Apellido..." id="buscarApellido">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Nombre:  </label><input (keyup.enter)="buscarApellNomb( )" #input type="text" class="form-control" placeholder="Nombre..." id="buscarNombre">
+                        </div>
+                        <div *ngIf="cargandoApNom" class="spinner-border" role="status">
+                            <span class="sr-only">Cargando...</span>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <button (click)="buscarApellNomb( )" class="btn btn-primary">
+                                Consulta
+                                <i class="material-icons ">
+                                    search
+                                    </i>
+                                </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-body bg-secondary">
+                <div>
+                </div>
+                <input #input maxlength="11" size="11" pattern="[0-9]*" (keyup.enter)="buscarDNI( )" class="form-control" placeholder="Buscar por DNI..." id="BuscarPersona"><br>
+                <button (click)="buscarDNI( )" class="btn btn-primary">
+                    Consulta
+                    <div *ngIf="cargandoDNI" class="spinner-border" role="status">
+                        <span class="sr-only">Cargando...</span>
+                    </div>
+                    <i class="material-icons ">
+                        search
+                        </i>
+
+                    </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <button (click)="cargarPadron( )" class="btn btn-success">
+                        Actualizar lista
+                            <i class="material-icons ">
+                                wifi_protected_setup
+                                </i>
+                            </button>
+                <div *ngIf="cargandoPadron" class="spinner-border" role="status">
+                    <span class="sr-only">Cargando...</span>
+                </div>
+
+                <div class="text-right">
+                    <button [routerLink]="['/personas/agregar']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                      <i class="fa fa-plus"></i>
+                      Nueva Persona
+                    </button>
+                </div>
+                <div class="custom-control custom-switch">
+                    <input (click)="modificaBanderaTucuman( )" type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1">Solo Rio Chico</label>
+                </div>
+                <br>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>DNI</th>
+                            <th>Apellidos</th>
+                            <th>Nombres</th>
+                            <th>Domicilios</th>
+                            <th>Localidad</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- <tr *ngFor="let cliente of clientes" [ngClass]="{'bg-danger text-warning':!cliente.ClasesDisponibles }"> -->
+                        <tr *ngFor="let p of padron">
+
+                            <td>{{ p.DNI }}</td>
+                            <td>{{ p.Apellidos }}</td>
+                            <td>{{ p.Nombres }}</td>
+                            <td>{{ p.Domicilio }}</td>
+                            <td>{{ p.Localidad }}</td>
+                            <td>
+                                <!-- ************* BOTONES ****************** -->
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button *ngIf="this.IdRol !== 4" title="Socioeconomico" [routerLink]="[ '/persona/socioeconomico', p.IdPersona ] " class="btn btn-success ">
+                                <i class="material-icons ">
+                                    analytics
+                                    </i>
+                                </button>
+
+                                    <button *ngIf="this.IdRol !== 4" title="Ver Pedidos" [routerLink]="[ '/pedidos', p.IdPersona ] " class="btn btn-warning ">
+                                <i class="material-icons ">
+                                    remove_red_eye
+                                    </i>
+                            </button>
+                                    <button *ngIf="(this.IdRol !== 2) && (this.IdRol !== 4)" title="Nuevo Pedido" [routerLink]="[ '/pedidos/nuevo', p.IdPersona ] " class="btn btn-primary ">
+                                <i class="material-icons ">
+                                    add_circle_outline
+                                    </i>
+                            </button>
+
+                                    <button *ngIf="this.IdRol === 4" title="Cargar entrega" [routerLink]="[ '/control/entregas', p.IdPersona ] " class="btn btn-primary ">
+                                <i class="material-icons ">
+                                    local_shipping
+                                    </i>
+                            </button>
+                                </div>
+                                <!-- ************* FIN BOTONES ****************** -->
+
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-5) " class="btn btn-secondary ">
+                    Anteriores
+                  </button>
+
+                <button (click)="cambiarDesde(5) " class="btn btn-secondary " style="margin-left: 50px; ">
+                      Siguientes
+                  </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

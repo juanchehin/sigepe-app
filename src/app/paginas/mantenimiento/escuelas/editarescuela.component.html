@@ -1,0 +1,49 @@
+<div class="container">
+    <h4 class="card-title">Edicion de escuela {{ Escuela }}</h4>
+    <div class="col-lg-12 well">
+        <div class="row">
+            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="actualizaEscuela()" id="forma">
+                <div class="col-sm-60">
+                    <div class="alert alert-primary" role="alert">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>Escuela : </label>
+                                <input formControlName="Escuela" [value]="Escuela" name="Escuela" type="text" class="form-control" placeholder="Escuela...">
+
+                                <label required class="control-label">Calle : </label>
+                                <select class="custom-select" formControlName="IdCalle" required>
+                                    <option [ngValue]="null"> {{ Calle  }} </option>
+                                    <option *ngFor="let calle of calles" [ngValue]="calle.IdCalle">{{ calle.Calle }}</option>
+                                 </select>
+                            </div>
+
+                            <div class="col-sm-6 form-group">
+                                <label>Director : </label>
+                                <input formControlName="Director" [value]="Director" name="Director" type="text" class="form-control" placeholder="Director...">
+
+                                <label required class="control-label">Localidad :  </label>
+                                <select class="custom-select" formControlName="IdLocalidad" required>
+                                    <option [ngValue]="null">{{ Localidad }}</option>
+                                    <option *ngFor="let localidad of localidades" [ngValue]="localidad.IdLocalidad">{{ localidad.Localidad }}</option>
+                                 </select>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Numero de Calle : </label>
+                                <input formControlName="NroCalle" [value]="NroCalle" name="NroCalle" type="text" class="form-control" placeholder="Numero de la calle">
+
+                                <label for="start">Estado : </label>
+                                <select formControlName="Estado" [value]="Estado" name="Estado" class="form-control">
+                                    <option value="A">Alta</option>
+                                    <option value="B">Baja</option>
+                                </select>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Guardar cambios</button>
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

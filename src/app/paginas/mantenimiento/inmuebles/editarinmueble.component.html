@@ -1,0 +1,22 @@
+<div class="container">
+    <h4 class="card-title">Edicion de {{ Inmueble }}</h4>
+
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="actualizaInmueble()" id="forma">
+        <div class="row alert alert-primary">
+            <div class="col">
+                <label>Nombre de la Inmueble : </label>
+                <input formControlName="Inmueble" [value]="Inmueble" name="Vivienda" type="text" class="form-control" placeholder="Inmueble...">
+            </div>
+            <div class="col">
+                <label for="start">Estado : </label>
+                <select formControlName="Estado" [value]="Estado" name="Estado" class="form-control">
+                                    <option value="A">Alta</option>
+                                    <option value="B">Baja</option>
+                                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Guardar cambios</button>
+        <br><br>
+    </form>
+
+</div>

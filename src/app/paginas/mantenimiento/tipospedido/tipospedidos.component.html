@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tipos Vivienda SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+</head>
+<br>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+
+                <div class="text-right">
+                    <button [routerLink]="['/mantenimiento/tipospedidos/nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                      <i class="fa fa-plus"></i> 
+                      Nuevo Tipo de pedido
+                    </button>
+                </div>
+                <br>
+                <h3 class="card-title">Total de tipos de pedidos ( <small> {{ totalTiposPedidos }} </small> )</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tipo de pedido</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let tp of tiposPedidos">
+
+                            <td>{{ tp.TipoPedido }}</td>
+                            <td>
+                                <!-- ************* BOTONES ****************** -->
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button title="Editar Tipo de Pedido" [routerLink]="[ '/mantenimiento/tipospedidos/editar', tp.IdTipoPedido ] " class="btn btn-muted ">
+                                <i class="material-icons ">
+                                    edit
+                                    </i>
+                                </button>
+                                    <button title="Eliminar Tipo de Pedido" (click)="eliminarTipoPedido( tp ) " class="btn btn-muted ">
+                                    <i class="material-icons ">
+                                        delete
+                                        </i>
+                                    </button>
+                                </div>
+                                <!-- ************* FIN BOTONES ****************** -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-5) " class="btn btn-secondary ">
+                    Anteriores
+                  </button>
+
+                <button (click)="cambiarDesde(5) " class="btn btn-secondary " style="margin-left: 50px; ">
+                      Siguientes
+                  </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

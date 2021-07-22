@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<br>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/control']">Control Covid-19</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/control/censo']">Censo</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/control/censo/grupo/listar']">Grupos Familiares</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Grupo {{ IdGrupoFamiliar }}</li>
+    </ol>
+</nav>
+<div class="container">
+    <h1 class="well">Grupo Familiar Nro : {{ IdGrupoFamiliar }}</h1>
+
+    <br>
+    <div class="alert alert-primary" role="alert">
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label>Barrio : {{ Barrio }}</label>
+            </div>
+            <div class="col-sm-6 form-group">
+                <label>Manzana : {{ Manzana }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label>Jefe de familia : {{ Apellidos }} {{ Nombres }}</label>
+            </div>
+            <div class="col-sm-6 form-group">
+                <label>Fecha de carga : {{ FechaCarga | date:"dd/MM/yyyy"}}</label>
+            </div>
+        </div>
+    </div>
+    <!-- =========================================================================== -->
+    <!-- ============================ INTEGRANTES =================================== -->
+    <!-- =========================================================================== -->
+    <div class="container">
+        <!-- <div class="row"> -->
+        <!-- <div class="col-md-4"> -->
+        <h1 class="well">Integrantes </h1>
+        <!-- </div> -->
+        <div class="col-md-6 offset-md-6">
+            <button title="Nuevo Integrante" [routerLink]="['/control/censo/grupo/persona', this.IdGrupoFamiliar ]" class="btn btn-info">
+                Nuevo Integrante
+                <i class="material-icons">
+                    add_box
+                    </i>
+            </button>
+            <button type="button" class="btn btn-outline-success">
+              <a (click)="exportexcel()">
+                Exportar excel
+                <i class="material-icons">
+                    list_alt
+                    </i>
+            </a>
+            </button>
+        </div>
+        <!-- </div> -->
+    </div>
+    <br>
+    <table class="table table-striped" id="excel-table">
+        <thead>
+            <tr>
+                <th scope="col">DNI</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Nombres</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let integrante of integrantes">
+                <td>
+                    {{ integrante.DNI }}
+                </td>
+                <td>
+                    {{ integrante.Apellidos }}
+                </td>
+                <td>{{ integrante.Nombres }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- </div> -->
+    <br>
+
+</div>

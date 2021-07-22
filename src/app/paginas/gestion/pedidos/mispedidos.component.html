@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Mis Pedidos SIGEPE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+
+    <!--  -->
+
+</head>
+<br><br>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Mis pedidos</h4>
+                <br>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>N° Pedido</th>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Beneficiario</th>
+                            <th>Estado</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let mp of misPedidos">
+                            <td>{{ mp.IdPedido }}</td>
+                            <td>{{ mp.Fecha | date:"dd/MM/yyyy"}}</td>
+                            <td>{{ mp.Pedido }}</td>
+                            <td>{{ mp.Apellidos }} {{ mp.Nombres }}</td>
+                            <td>{{ mp.Estado }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button title="Concluir pedido" (click)="terminarPedido( mp )" class="btn btn-primary ">
+                                        <i class="material-icons ">
+                                            done_outline
+                                            </i>
+                                        </button>
+                                    <button title="Ver Estado pedido" [routerLink]="[ '/empleado/pedidos/detalles/', mp.IdPedido ] " class="btn btn-info">
+                                            <i class="material-icons ">
+                                                remove_red_eye
+                                                </i>
+                                            </button>
+                                </div>
+                            </td>
+                            <td>
+                                <button *ngIf="mp.mensajesPendientes !== 0" class="btn btn-success">{{ mp.mensajesPendientes }}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-5) " class="btn btn-secondary ">
+                    Anteriores
+                  </button>
+                <button (click)="cambiarDesde(5) " class="btn btn-secondary " style="margin-left: 50px; ">
+                      Siguientes
+                  </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

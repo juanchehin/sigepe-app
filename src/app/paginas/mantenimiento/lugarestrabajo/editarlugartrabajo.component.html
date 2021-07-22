@@ -1,0 +1,22 @@
+<div class="container">
+    <h4 class="card-title">Edicion de {{ Lugar }}</h4>
+
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="actualizaLugar()" id="forma">
+        <div class="row alert alert-primary">
+            <div class="col">
+                <label>Nombre del lugar : </label>
+                <input formControlName="Lugar" [value]="Lugar" name="Lugar" type="text" class="form-control" placeholder="Lugar...">
+            </div>
+            <div class="col">
+                <label for="start">Estado : </label>
+                <select formControlName="Estado" [value]="Estado" name="Estado" class="form-control">
+                                    <option value="A">Alta</option>
+                                    <option value="B">Baja</option>
+                                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Guardar cambios</button>
+        <br><br>
+    </form>
+
+</div>
